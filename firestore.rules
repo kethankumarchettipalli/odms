@@ -1,0 +1,49 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users collection
+    match /users/{userId} {
+      // Users can read and write their own data
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // Admins and superadmins can read/write all user data
+      allow read, write: if request.auth != null && 
+        resource.data.role in ['admin', 'superadmin'];
+      
+      // Allow reading for matching purposes (donors visible to admins)
+      allow read: if request.auth != null && 
+        resource.data.role == 'donor' &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'superadmin'];
+    }
+    
+    // Organ requests collection
+    match /requests/{requestId} {
+      // Patients can create and read their own requests
+      allow create: if request.auth != null && 
+        resource.data.patientId == request.auth.uid;
+      
+      allow read: if request.auth != null && 
+        resource.data.patientId == request.auth.uid;
+      
+      // Admins can read and update all requests
+      allow read, update: if request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'superadmin'];
+      
+      // Prevent deletion except by superadmins
+      allow delete: if request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'superadmin';
+    }
+    
+    // Chat logs (if implemented)
+    match /chat_logs/{chatId} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Analytics data (read-only for most users)
+    match /analytics/{docId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'superadmin'];
+    }
+  }
+}

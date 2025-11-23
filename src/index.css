@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Organ Donation Management System Design System */
+
+@layer base {
+  :root {
+    /* Healthcare-inspired color palette */
+    --background: 345 100% 99%;
+    --foreground: 345 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 15% 15%;
+
+    /* Updated primary to pink/red theme */
+    --primary: 345 85% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-soft: 345 100% 96%;
+
+    /* Updated secondary to complement pink */
+    --secondary: 15 85% 60%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-soft: 15 100% 95%;
+
+    /* Soft medical grays */
+    --muted: 210 20% 96%;
+    --muted-foreground: 210 15% 45%;
+
+    /* Trust accent */
+    --accent: 210 100% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Warning/urgent orange */
+    --warning: 25 95% 55%;
+    --warning-foreground: 0 0% 100%;
+
+    /* Medical emergency red */
+    --destructive: 0 75% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Success green */
+    --success: 145 75% 40%;
+    --success-foreground: 0 0% 100%;
+
+    /* Borders and inputs */
+    --border: 210 20% 88%;
+    --input: 210 20% 94%;
+    --ring: 200 95% 35%;
+
+    /* Medical gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-soft: linear-gradient(180deg, hsl(var(--primary-soft)), hsl(var(--secondary-soft)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+
+    /* Pastel hero palette */
+    --pink-50: 345 100% 98%;
+    --pink-100: 345 100% 96%;
+    --pink-200: 345 80% 90%;
+
+    /* Pastel hero gradient */
+    --gradient-pastel-hero: linear-gradient(180deg, hsl(var(--pink-50)), hsl(var(--pink-100)));
+    /* Healthcare shadows */
+    --shadow-medical: 0 4px 20px -4px hsl(var(--primary) / 0.1);
+    --shadow-card: 0 2px 10px -2px hsl(210 20% 20% / 0.08);
+    --shadow-floating: 0 10px 40px -10px hsl(var(--primary) / 0.15);
+
+    /* Professional animations */
+    --transition-medical: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark medical theme */
+    --background: 210 25% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 210 25% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 210 25% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 200 95% 45%;
+    --primary-foreground: 0 0% 100%;
+    --primary-soft: 200 50% 15%;
+
+    --secondary: 145 65% 50%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-soft: 145 30% 15%;
+
+    --muted: 210 25% 15%;
+    --muted-foreground: 210 10% 70%;
+
+    --accent: 210 100% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --warning: 25 95% 60%;
+    --warning-foreground: 0 0% 100%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 145 75% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 210 25% 20%;
+    --input: 210 25% 15%;
+    --ring: 200 95% 45%;
+
+    --sidebar-background: 210 25% 8%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 200 95% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 25% 15%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 210 25% 20%;
+    --sidebar-ring: 200 95% 45%;
+
+    /* Pastel hero (dark) */
+    --pink-50: 350 30% 16%;
+    --pink-100: 350 25% 12%;
+    --pink-200: 350 35% 22%;
+    --gradient-pastel-hero: linear-gradient(180deg, hsl(var(--pink-50)), hsl(var(--pink-100)));
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-medium;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background: var(--gradient-pastel-hero);
+  }
+
+  /* Medical UI helpers */
+  .medical-gradient {
+    background: var(--gradient-primary);
+  }
+
+  .medical-shadow {
+    box-shadow: var(--shadow-medical);
+  }
+
+  .card-shadow {
+    box-shadow: var(--shadow-card);
+  }
+
+  .floating-shadow {
+    box-shadow: var(--shadow-floating);
+  }
+
+  .transition-medical {
+    transition: var(--transition-medical);
+  }
+
+  /* Pastel hero background + subtle accents */
+  .pastel-hero {
+    background: var(--gradient-pastel-hero);
+    position: relative;
+  }
+
+  .pastel-hero::before,
+  .pastel-hero::after {
+    content: "";
+    position: absolute;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 9999px;
+    background: hsl(var(--pink-200));
+    opacity: 0.6;
+    animation: float-slow 12s ease-in-out infinite;
+    box-shadow: 0 20px 40px -10px hsl(var(--primary) / 0.12);
+  }
+
+  .pastel-hero::before { top: 18%; left: 1rem; }
+  .pastel-hero::after { top: 28%; right: 1.25rem; animation-delay: 2s; }
+
+  @keyframes float-slow {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+  }
+}
